@@ -10,7 +10,7 @@ const app = express();
 
 // Configure CORS to allow access from frontend
 app.use(cors({
-  origin: '*', // We will restrict this to client URL in production
+  origin: 'https://flavorfind-recipe-app.vercel.app', // We will restrict this to client URL in production
   credentials: true
 }));
 
