@@ -1,0 +1,141 @@
+/* Google Fonts: Outfit, Inter, Alegreya, Playfair Display, Baloo Bhaijaan 2 */
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Baloo+Bhaijaan+2:wght@400..800&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+  /* Color System from User Requirements */
+  --bg-primary: #FFF5F3;      /* Soft Off-White/Blush */
+  --bg-secondary: #FFFFFF;    /* Pure White (for cards/auth forms) */
+  --bg-tertiary: #F3D0CE;     /* Dusty Rose/Muted Pink */
+  
+  --text-primary: #1E1E1E;    /* Dark Charcoal/Nearly Black */
+  --text-secondary: #4A4A4A;  /* Muted Charcoal for sub-text */
+  --text-muted: #8E7A77;      /* Warm grayish-brown for disabled/muted */
+
+  --accent-primary: #B94A2F;  /* Terracotta/Burnt Orange */
+  --accent-primary-hover: #9E3820;
+  --accent-secondary: #FF9A3C;/* Bright Orange/Yellow-Gold */
+  
+  --border-color: #EADCDA;    /* Warm soft border matching blush */
+  --danger-color: #D32F2F;
+  --success-color: #2E7D32;
+  --info-color: #1976D2;
+
+  /* Typography */
+  --font-display: 'Outfit', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-h1: 'Alegreya', serif;
+  --font-h2: 'Handelson Three', 'Playfair Display', cursive, sans-serif;
+  --font-smallest: 'Playfair Display', serif;
+  --font-nav-btn: 'Baloo Bhaijaan 2', 'Baloo Bhaijaan', sans-serif;
+
+  /* Layout and Spacing */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --max-width: 1200px;
+  --shadow-sm: 0 2px 12px rgba(185, 74, 47, 0.05);
+  --shadow-md: 0 8px 30px rgba(185, 74, 47, 0.08);
+  --shadow-lg: 0 16px 40px rgba(185, 74, 47, 0.12);
+}
+
+/* CSS Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Large, curved decorative graphic shape on the right side of the background */
+body::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 48%;
+  height: 100%;
+  background-color: var(--bg-tertiary); /* Dusty Rose/Muted Pink */
+  clip-path: ellipse(75% 75% at 90% 45%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* For mobile devices, shrink the background shape so content remains readable */
+@media (max-width: 768px) {
+  body::after {
+    width: 60%;
+    clip-path: ellipse(90% 50% at 100% 30%);
+  }
+}
+
+h1 {
+  font-family: var(--font-h1);
+}
+
+h2 {
+  font-family: var(--font-h2);
+}
+
+h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-primary); /* Dark Charcoal */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Base Utility Classes */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Custom Scrollbar matching Warm Theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

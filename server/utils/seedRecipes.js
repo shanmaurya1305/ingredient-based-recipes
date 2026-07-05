@@ -1,0 +1,299 @@
+const mongoose = require('mongoose');
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../.env') }); // Safely load .env relative to script directory
+const Recipe = require('../models/Recipe');
+const connectDB = require('../config/db');
+
+const sampleIndianRecipes = [
+  {
+    title: "Paneer Butter Masala",
+    description: "A rich, creamy, and mildly sweet North Indian paneer curry made with tomatoes, butter, cashews, and spices.",
+    image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "paneer", quantity: 200, unit: "g" },
+      { name: "tomato", quantity: 3, unit: "pieces" },
+      { name: "onion", quantity: 1, unit: "piece" },
+      { name: "butter", quantity: 30, unit: "g" },
+      { name: "heavy cream", quantity: 2, unit: "tbsp" },
+      { name: "garam masala", quantity: 1, unit: "tsp" },
+      { name: "cashew nuts", quantity: 10, unit: "pieces" },
+      { name: "ginger garlic paste", quantity: 1, unit: "tbsp" }
+    ],
+    instructions: [
+      "Boil chopped tomatoes, onions, and cashews in a cup of water for 10 minutes, then blend into a smooth paste.",
+      "Melt butter in a pan over medium heat. Add ginger-garlic paste and sauté for 1 minute.",
+      "Pour in the tomato-cashew puree and cook for 5-6 minutes until oil begins to separate.",
+      "Add garam masala, salt, and half a cup of water. Simmer for 3 minutes.",
+      "Gently add paneer cubes, stir, and cook for 2 minutes on low heat.",
+      "Finish by swirling in heavy cream and serve hot with naan or roti."
+    ],
+    cookingTime: 25,
+    servings: 2,
+    difficulty: "Medium",
+    category: "Dinner",
+    cuisine: "Indian"
+  },
+  {
+    title: "Tangy Chana Masala",
+    description: "A flavorful, protein-packed chickpea curry simmered in a tangy onion-tomato gravy with warm spices.",
+    image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "chickpeas", quantity: 250, unit: "g" },
+      { name: "onion", quantity: 2, unit: "pieces" },
+      { name: "tomato", quantity: 2, unit: "pieces" },
+      { name: "garlic", quantity: 3, unit: "cloves" },
+      { name: "cumin seeds", quantity: 1, unit: "tsp" },
+      { name: "coriander powder", quantity: 1, unit: "tsp" },
+      { name: "garam masala", quantity: 0.5, unit: "tsp" },
+      { name: "lemon", quantity: 0.5, unit: "piece" }
+    ],
+    instructions: [
+      "Soak chickpeas overnight and boil until soft (or use canned chickpeas).",
+      "Heat oil in a pan, add cumin seeds. Once they splutter, add finely chopped onions and sauté until golden brown.",
+      "Add minced garlic and ginger, cook for 1 minute, then add chopped tomatoes and spices. Cook until tomatoes are mushy.",
+      "Add the boiled chickpeas along with 1 cup of cooking water. Mash a few chickpeas with a spatula to thicken the gravy.",
+      "Simmer for 10-12 minutes on low heat until spices are fully absorbed.",
+      "Squeeze fresh lemon juice over the top, stir, and serve with bhatura or steamed rice."
+    ],
+    cookingTime: 30,
+    servings: 3,
+    difficulty: "Easy",
+    category: "Lunch",
+    cuisine: "Indian"
+  },
+  {
+    title: "Dhaba Style Dal Tadka",
+    description: "Creamy yellow lentils (toor dal) cooked with spices and tempered with ghee, cumin seeds, garlic, and red chilies.",
+    image: "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "yellow lentils", quantity: 150, unit: "g" },
+      { name: "onion", quantity: 1, unit: "piece" },
+      { name: "tomato", quantity: 1, unit: "piece" },
+      { name: "garlic", quantity: 4, unit: "cloves" },
+      { name: "cumin seeds", quantity: 1, unit: "tsp" },
+      { name: "ghee", quantity: 2, unit: "tbsp" },
+      { name: "turmeric powder", quantity: 0.5, unit: "tsp" },
+      { name: "cilantro", quantity: 2, unit: "tbsp" }
+    ],
+    instructions: [
+      "Wash yellow lentils. Pressure cook or boil them in water with turmeric powder and salt until soft.",
+      "In a pan, heat ghee. Add cumin seeds and chopped garlic. Sauté until garlic turns golden brown.",
+      "Add chopped onions and fry until translucent. Add chopped tomatoes and cook for 3 minutes.",
+      "Pour the boiled dal into the pan, mix well, and bring to a simmer. Adjust salt and thickness with water.",
+      "For the final tempering (tadka): Heat a spoonful of ghee in a tiny pan, add cumin, dried red chili, and pour it sizzling over the dal.",
+      "Garnish with chopped cilantro and serve with jeera rice."
+    ],
+    cookingTime: 20,
+    servings: 3,
+    difficulty: "Easy",
+    category: "Lunch",
+    cuisine: "Indian"
+  },
+  {
+    title: "Homestyle Aloo Gobi",
+    description: "A classic dry Indian side dish made of cauliflower florets and potato cubes stir-fried with turmeric and ginger.",
+    image: "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "potato", quantity: 2, unit: "pieces" },
+      { name: "cauliflower", quantity: 1, unit: "piece" },
+      { name: "onion", quantity: 1, unit: "piece" },
+      { name: "turmeric powder", quantity: 0.5, unit: "tsp" },
+      { name: "cumin seeds", quantity: 1, unit: "tsp" },
+      { name: "garam masala", quantity: 0.5, unit: "tsp" },
+      { name: "ginger", quantity: 1, unit: "tsp" }
+    ],
+    instructions: [
+      "Cut potatoes into cubes and cauliflower into medium-sized florets.",
+      "Heat oil in a pan, add cumin seeds and finely grated ginger. Fry for 30 seconds.",
+      "Add chopped onions and sauté until soft. Add potatoes, cauliflower, turmeric, and salt.",
+      "Cover the pan and cook on low heat for 15 minutes, stirring occasionally so it doesn't burn, until vegetables are tender.",
+      "Sprinkle garam masala and chopped coriander leaves over the dry stir-fry, toss gently, and serve."
+    ],
+    cookingTime: 20,
+    servings: 4,
+    difficulty: "Easy",
+    category: "Lunch",
+    cuisine: "Indian"
+  },
+  {
+    title: "Spiced Masala Chai",
+    description: "The quintessential Indian milk tea brewed with crushed fresh ginger, cardamom pods, and strong black tea leaves.",
+    image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "milk", quantity: 200, unit: "ml" },
+      { name: "water", quantity: 200, unit: "ml" },
+      { name: "tea leaves", quantity: 2, unit: "tsp" },
+      { name: "sugar", quantity: 2, unit: "tsp" },
+      { name: "ginger", quantity: 1, unit: "slice" },
+      { name: "cardamom", quantity: 2, unit: "pieces" }
+    ],
+    instructions: [
+      "Boil water in a saucepan. Add crushed ginger and slightly crushed cardamom pods, simmering for 2 minutes to extract flavors.",
+      "Add black tea leaves and sugar. Let the water boil for another minute.",
+      "Pour in the milk and bring the mixture to a rolling boil.",
+      "Once it boils, reduce heat to low and simmer for 2 minutes until it develops a rich caramel-brown color.",
+      "Strain the hot masala chai through a sieve directly into cups and serve with biscuits."
+    ],
+    cookingTime: 8,
+    servings: 2,
+    difficulty: "Easy",
+    category: "Breakfast",
+    cuisine: "Indian"
+  },
+  {
+    title: "Classic Chicken Tikka Masala",
+    description: "Tender pieces of grilled chicken tikka folded into a creamy, spiced, tomato-based gravy.",
+    image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "chicken breast", quantity: 400, unit: "g" },
+      { name: "yogurt", quantity: 100, unit: "g" },
+      { name: "onion", quantity: 1, unit: "piece" },
+      { name: "ginger garlic paste", quantity: 1, unit: "tbsp" },
+      { name: "garam masala", quantity: 1, unit: "tsp" },
+      { name: "butter", quantity: 20, unit: "g" },
+      { name: "heavy cream", quantity: 3, unit: "tbsp" }
+    ],
+    instructions: [
+      "Cut chicken into cubes, marinate with yogurt, garam masala, salt, and ginger-garlic paste for 30 minutes, then pan-sear until browned.",
+      "In a separate pan, melt butter, sauté chopped onions until brown, then add ginger-garlic paste.",
+      "Add tomato puree and spices, cooking until grease separates.",
+      "Add grilled chicken pieces to the gravy along with half a cup of water. Cover and simmer for 8 minutes.",
+      "Swirl in the heavy cream and serve warm with naan."
+    ],
+    cookingTime: 35,
+    servings: 3,
+    difficulty: "Medium",
+    category: "Dinner",
+    cuisine: "Indian"
+  },
+  {
+    title: "Aloo Paratha",
+    description: "Traditional Punjabi griddled whole-wheat flatbread stuffed with a spiced mashed potato mixture.",
+    image: "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "wheat flour", quantity: 200, unit: "g" },
+      { name: "potato", quantity: 2, unit: "pieces" },
+      { name: "onion", quantity: 0.5, unit: "piece" },
+      { name: "garam masala", quantity: 0.5, unit: "tsp" },
+      { name: "butter", quantity: 20, unit: "g" },
+      { name: "cilantro", quantity: 1, unit: "tbsp" }
+    ],
+    instructions: [
+      "Knead wheat flour with water and a pinch of salt to form a soft dough. Let it rest for 15 minutes.",
+      "Boil and mash the potatoes. Add finely chopped onion, cilantro, garam masala, and salt. Mix well.",
+      "Pinch a ball of dough, roll it to a 4-inch circle, place a ball of potato filling in the center, and fold the edges to seal.",
+      "Gently roll out the stuffed dough ball into a 7-inch flat circle, taking care not to spill the stuffing.",
+      "Cook on a hot griddle (tawa), flipping and applying butter on both sides until golden brown spots appear.",
+      "Serve hot with yogurt or pickles."
+    ],
+    cookingTime: 20,
+    servings: 2,
+    difficulty: "Medium",
+    category: "Breakfast",
+    cuisine: "Indian"
+  },
+  {
+    title: "Restaurant Style Palak Paneer",
+    description: "Soft paneer cubes cooked in a vibrant, creamy spinach gravy spiced with garlic, ginger, and green chilies.",
+    image: "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "spinach", quantity: 250, unit: "g" },
+      { name: "paneer", quantity: 200, unit: "g" },
+      { name: "onion", quantity: 1, unit: "piece" },
+      { name: "tomato", quantity: 1, unit: "piece" },
+      { name: "garlic", quantity: 3, unit: "cloves" },
+      { name: "heavy cream", quantity: 1, unit: "tbsp" },
+      { name: "garam masala", quantity: 0.5, unit: "tsp" }
+    ],
+    instructions: [
+      "Blanch spinach leaves in boiling water for 2 minutes, plunge into cold water to retain green color, and blend to a smooth puree.",
+      "Sauté chopped onions, garlic, and ginger in a pan until brown. Add chopped tomato and cook until soft.",
+      "Pour in the spinach puree, add garam masala, salt, and simmer for 5 minutes.",
+      "Stir in the paneer cubes and let them warm through in the spinach gravy for 2 minutes.",
+      "Drizzle with heavy cream and serve."
+    ],
+    cookingTime: 25,
+    servings: 3,
+    difficulty: "Medium",
+    category: "Dinner",
+    cuisine: "Indian"
+  },
+  {
+    title: "Street Style Samosa",
+    description: "Crispy fried pastry cones stuffed with a savory filling of spiced potatoes, green peas, and coriander seeds.",
+    image: "https://images.unsplash.com/photo-1601050690597-df056fb4ce78?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "wheat flour", quantity: 150, unit: "g" },
+      { name: "potato", quantity: 3, unit: "pieces" },
+      { name: "green peas", quantity: 50, unit: "g" },
+      { name: "cumin seeds", quantity: 1, unit: "tsp" },
+      { name: "garam masala", quantity: 1, unit: "tsp" },
+      { name: "oil", quantity: 250, unit: "ml" }
+    ],
+    instructions: [
+      "Knead flour, oil, and water into a firm dough. Let it rest.",
+      "Heat a spoon of oil, sauté cumin seeds, then add green peas and boiled potato cubes. Add garam masala, salt, and mash slightly.",
+      "Divide dough, roll into ovals, cut in half to make semi-circles, fold into cones, and stuff with the potato mixture.",
+      "Seal the edges with water and deep fry on low-medium heat until golden and crisp (approx 10-12 minutes).",
+      "Serve hot with green mint chutney."
+    ],
+    cookingTime: 35,
+    servings: 4,
+    difficulty: "Hard",
+    category: "Lunch",
+    cuisine: "Indian"
+  },
+  {
+    title: "Fragrant Veg Biryani",
+    description: "A majestic layered rice dish made with aromatic basmati rice, mixed vegetables, yogurt, and warm biryani spices.",
+    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=60",
+    ingredients: [
+      { name: "basmati rice", quantity: 200, unit: "g" },
+      { name: "carrot", quantity: 1, unit: "piece" },
+      { name: "green peas", quantity: 50, unit: "g" },
+      { name: "potato", quantity: 1, unit: "piece" },
+      { name: "yogurt", quantity: 3, unit: "tbsp" },
+      { name: "onion", quantity: 1, unit: "piece" },
+      { name: "biryani masala", quantity: 1, unit: "tbsp" },
+      { name: "ghee", quantity: 2, unit: "tbsp" },
+      { name: "mint leaves", quantity: 10, unit: "leaves" }
+    ],
+    instructions: [
+      "Wash and parboil basmati rice until 70% cooked. Drain and set aside.",
+      "Sauté vegetables (carrots, potatoes, peas) with onions, yogurt, and biryani masala in a pot until tender.",
+      "Layer the cooked vegetables at the bottom of a heavy pot, then spread the parboiled rice evenly over it.",
+      "Top with ghee, mint leaves, fried onions, and a splash of saffron-infused milk.",
+      "Seal the pot with lid and cook on low heat (dum) for 15 minutes to allow aromas to blend.",
+      "Fluff gently and serve with raita."
+    ],
+    cookingTime: 40,
+    servings: 3,
+    difficulty: "Hard",
+    category: "Dinner",
+    cuisine: "Indian"
+  }
+];
+
+const seedIndianDatabase = async () => {
+  await connectDB();
+
+  try {
+    // Clear out existing recipe records
+    await Recipe.deleteMany({});
+    console.log('Cleared all pre-existing recipes.');
+
+    // Insert Indian recipes
+    const seededRecipes = await Recipe.insertMany(sampleIndianRecipes);
+    console.log(`Successfully seeded ${seededRecipes.length} authentic Indian recipes into the database!`);
+    
+    mongoose.connection.close();
+    console.log('Database connection closed.');
+    process.exit(0);
+  } catch (error) {
+    console.error(`Seeding Indian database failed: ${error.message}`);
+    mongoose.connection.close();
+    process.exit(1);
+  }
+};
+
+seedIndianDatabase();

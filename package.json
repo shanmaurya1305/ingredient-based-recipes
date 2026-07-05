@@ -1,0 +1,14 @@
+{
+  "name": "recipe-recommendation-system",
+  "version": "1.0.0",
+  "description": "A full-stack Recipe Recommendation and Nutritional Analysis web app built with the MERN stack. Features search, dietary filters, user auth, and favorites. Integrates with the USDA FoodData Central API to dynamically calculate nutrition profiles (macros, calories) with smart caching.",
+  "main": "server/server.js",
+  "scripts": {
+    "server": "npm run dev --prefix server",
+    "client": "npm run dev --prefix client",
+    "dev": "npm run dev --prefix server & npm run dev --prefix client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
