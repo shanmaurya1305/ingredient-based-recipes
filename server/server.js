@@ -13,7 +13,9 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://127.0.0.1:5173',
   'https://ingredient-based-recipes.vercel.app',
-  'https://ingredient-based-recipes.vercel.app/'
+  'https://ingredient-based-recipes.vercel.app/',
+  'https://be-the-chef.vercel.app',
+  'https://be-the-chef.vercel.app/'
 ];
 
 app.use(cors({
