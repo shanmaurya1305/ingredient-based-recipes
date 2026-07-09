@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import RecipeCard from '../components/RecipeCard';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { Plus, X, Search, Sparkles, Utensils } from 'lucide-react';
+import { Plus, X, Search, Sparkles, BookOpen, Users, Compass, Award, Heart } from 'lucide-react';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -32,7 +32,6 @@ const Home = () => {
         // Fetch favorites to display heart badges
         if (user) {
           const favsRes = await api.get('/favorites');
-          // Store just the array of recipe IDs for quick lookup
           const favIds = favsRes.data.data.favorites.map(fav => fav._id);
           setFavorites(favIds);
         }
@@ -66,6 +65,16 @@ const Home = () => {
   };
 
   /**
+   * Appends a quick add keyword directly to our matching array
+   */
+  const handleQuickAdd = (item) => {
+    const val = item.toLowerCase();
+    if (!ingredients.includes(val)) {
+      setIngredients([...ingredients, val]);
+    }
+  };
+
+  /**
    * Removes an ingredient chip
    */
   const handleRemoveIngredient = (indexToRemove) => {
@@ -76,9 +85,8 @@ const Home = () => {
    * Submits the ingredients to our matching recommendation API
    */
   const handleSearch = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (ingredients.length === 0) {
-      // If search is cleared, reload all recipes
       handleClearSearch();
       return;
     }
@@ -90,6 +98,9 @@ const Home = () => {
       const response = await api.post('/recipes/search', { ingredients });
       setRecipes(response.data.data.recipes);
       setIsSearched(true);
+      
+      // Scroll smoothly down to the recipes section
+      document.getElementById('featured-recipes')?.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
       setError(err.response?.data?.message || 'Search execution failed');
     } finally {
@@ -122,7 +133,6 @@ const Home = () => {
    */
   const handleToggleFavorite = async (recipeId) => {
     if (!user) {
-      // Redirect to login if user is not authenticated
       navigate('/login');
       return;
     }
@@ -131,11 +141,9 @@ const Home = () => {
 
     try {
       if (isFav) {
-        // Remove from favorites database
         await api.delete(`/favorites/${recipeId}`);
         setFavorites(favorites.filter(id => id !== recipeId));
       } else {
-        // Add to favorites database
         await api.post(`/favorites/${recipeId}`);
         setFavorites([...favorites, recipeId]);
       }
@@ -153,194 +161,277 @@ const Home = () => {
   }
 
   return (
-    <div className="container">
-      {/* Search Header Container */}
-      <section className="search-section">
+    <div>
+      {/* 1. HERO SECTION SPLIT LAYOUT */}
+      <div className="container">
+        <section className="hero-grid">
+          
+          {/* Left Column: Copy & Search Card */}
+          <div className="hero-content">
+            <span className="hero-subtitle">MERN RECOMMENDATION PORTFOLIO</span>
+            <h1 className="hero-title">
+              Authentic Taste of <br />
+              <span className="accent-text">Indian Cuisine</span> <br />
+              at Your Home
+            </h1>
+            <p className="hero-description">
+              Discover the latest trends, techniques, and secrets from a cooking enthusiast. Uploaded by cooking enthusiasts.
+            </p>
 
-        <h1 className="search-title">
-          What's in your <span style={{ color: 'var(--accent-primary)' }}>fridge</span>?
-        </h1>
-        <p className="search-description">
-          Enter the ingredients you have available, and we will recommend the best matching recipes you can cook right now.
-        </p>
+            {/* Custom Interactive Input Card */}
+            <div className="kitchen-card">
+              <h3 className="kitchen-card-title">What's in your kitchen?</h3>
+              
+              {/* Chip Tag Display */}
+              <div className="kitchen-chips-wrapper">
+                {ingredients.length === 0 ? (
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                    Add ingredients to match (e.g. paneer, ghee)...
+                  </span>
+                ) : (
+                  ingredients.map((ing, idx) => (
+                    <div key={idx} className="kitchen-chip">
+                      <span>{ing}</span>
+                      <button 
+                        type="button" 
+                        onClick={() => handleRemoveIngredient(idx)}
+                        className="kitchen-chip-remove"
+                      >
+                        <X size={12} />
+                      </button>
+                    </div>
+                  ))
+                )}
+              </div>
 
-        <form onSubmit={handleSearch}>
-          <div className="ingredient-input-wrapper">
-            <div className="chip-list">
-              {ingredients.map((ing, idx) => (
-                <div key={idx} className="chip">
-                  <span>{ing}</span>
+              {/* TextInput Input Row */}
+              <div className="kitchen-input-row">
+                <input 
+                  type="text"
+                  placeholder="Enter an ingredient..."
+                  className="kitchen-field"
+                  value={ingredientInput}
+                  onChange={(e) => setIngredientInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                />
+                <button 
+                  type="button"
+                  onClick={handleSearch}
+                  className="btn-find-recipe"
+                  disabled={searchLoading}
+                >
+                  <Search size={16} />
+                  <span>{searchLoading ? 'Searching...' : 'Find Recipe'}</span>
+                </button>
+              </div>
+
+              {/* Quick Add Row */}
+              <div className="quick-add-row">
+                <span>Quick add:</span>
+                {['Potato', 'Rice', 'Chicken', 'Tomato', 'Paneer'].map((item) => (
                   <button
+                    key={item}
                     type="button"
-                    onClick={() => handleRemoveIngredient(idx)}
-                    className="chip-remove"
+                    onClick={() => handleQuickAdd(item)}
+                    className="quick-add-btn"
                   >
-                    <X size={14} />
+                    +{item}
                   </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Gourmet Image & Review Overlays */}
+          <div className="hero-image-container">
+            <img 
+              src="https://images.unsplash.com/photo-1585938338392-50a59970d8ee?w=800&auto=format&fit=crop&q=80" 
+              alt="Authentic Indian Food Curry" 
+              className="hero-main-image"
+            />
+            
+            {/* Review Widget 1 */}
+            <div className="review-card one">
+              <div className="review-card-top">
+                <div className="review-avatar">AS</div>
+                <div>
+                  <h4 style={{ fontSize: '0.85rem', fontWeight: 700 }}>Aarav Sharma</h4>
+                  <div className="review-stars">★★★★★</div>
                 </div>
+              </div>
+              <p className="review-text">
+                "Finally, search-based Indian recipe recommendation done right!"
+              </p>
+            </div>
+
+            {/* Review Widget 2 */}
+            <div className="review-card two">
+              <div className="review-card-top">
+                <div className="review-avatar">RV</div>
+                <div>
+                  <h4 style={{ fontSize: '0.85rem', fontWeight: 700 }}>Rohan Vyas</h4>
+                  <div className="review-stars">★★★★★</div>
+                </div>
+              </div>
+              <p className="review-text">
+                "Fuzzy search actually matched the dry spices in my pantry."
+              </p>
+            </div>
+          </div>
+
+        </section>
+      </div>
+
+      {/* 2. ESPRESSO STATISTICS RIBBON */}
+      <section className="stats-ribbon">
+        <div className="stats-container">
+          <div className="stat-item">
+            <BookOpen size={24} className="stat-icon" />
+            <span className="stat-number">100+</span>
+            <span className="stat-label">Authentic Recipes</span>
+          </div>
+          
+          <div className="stat-item">
+            <Users size={24} className="stat-icon" />
+            <span className="stat-number">2k+</span>
+            <span className="stat-label">Happy Cooks</span>
+          </div>
+
+          <div className="stat-item">
+            <Compass size={24} className="stat-icon" />
+            <span className="stat-number">15+</span>
+            <span className="stat-label">Regional Cuisines</span>
+          </div>
+
+          <div className="stat-item">
+            <Award size={24} className="stat-icon" />
+            <span className="stat-number">5+</span>
+            <span className="stat-label">Verified Chefs</span>
+          </div>
+
+          <div className="stat-item">
+            <Heart size={24} className="stat-icon" />
+            <span className="stat-number">10k+</span>
+            <span className="stat-label">Community Members</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. "HOW BE THE CHEF WORKS?" WORKFLOW SECTION */}
+      <section id="how-it-works" className="works-section">
+        <div className="container">
+          <span className="hero-subtitle" style={{ fontSize: '0.8rem' }}>SIMPLE WORKFLOW</span>
+          <h2 className="section-title" style={{ marginTop: '0.5rem', fontFamily: 'var(--font-h1)' }}>
+            How Be The Chef Works?
+          </h2>
+          
+          <div className="works-grid">
+            {/* Card 1 */}
+            <div className="works-card">
+              <div className="works-icon-circle">
+                <Search size={28} />
+              </div>
+              <h3 className="works-card-title">Add Your Ingredients</h3>
+              <p className="works-card-text">
+                Enter whatever you have in your kitchen. Add one or multiple ingredients into the search chip field.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="works-card">
+              <div className="works-icon-circle">
+                <Sparkles size={28} />
+              </div>
+              <h3 className="works-card-title">See Your Match Score</h3>
+              <p className="works-card-text">
+                Our recommendation engine calculates a percentage match based on ingredients you have vs what the recipe needs.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="works-card">
+              <div className="works-icon-circle">
+                <Utensils size={28} />
+              </div>
+              <h3 className="works-card-title">Cook Authentic Food</h3>
+              <p className="works-card-text">
+                Follow easy step-by-step instructions, scale serving sizes dynamically, and view USDA nutrition facts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. FEATURED RECIPES GRID CATALOG */}
+      <section id="featured-recipes" className="recipes-section" style={{ backgroundColor: 'var(--bg-tertiary)' }}>
+        <div className="container">
+          <div className="section-header-row">
+            <div>
+              <h2 className="section-title" style={{ fontFamily: 'var(--font-h1)' }}>Featured Recipes</h2>
+              <p className="section-subtext">Most popular dishes cooked this week</p>
+            </div>
+            
+            {isSearched ? (
+              <button onClick={handleClearSearch} className="section-link" style={{ background: 'none', border: 'none' }}>
+                Reset Filters & View All
+              </button>
+            ) : (
+              <a href="#featured-recipes" className="section-link">
+                Browse All Recipes &rarr;
+              </a>
+            )}
+          </div>
+
+          {error && <div className="alert alert-danger">{error}</div>}
+
+          {searchLoading ? (
+            <LoadingSpinner />
+          ) : recipes.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '4rem 1rem', color: 'var(--text-secondary)' }}>
+              <p style={{ fontSize: '1.2rem', fontWeight: 600 }}>No matching recipes found.</p>
+              <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
+                Try searching for standard staples like paneer, potato, rice, chicken, or ghee!
+              </p>
+              <button onClick={handleClearSearch} className="btn-primary" style={{ maxWidth: '200px', marginTop: '1.5rem' }}>
+                Reset Filters
+              </button>
+            </div>
+          ) : (
+            <div className="recipes-grid">
+              {recipes.map((recipe) => (
+                <RecipeCard
+                  key={recipe._id}
+                  recipe={recipe}
+                  isFavorite={favorites.includes(recipe._id)}
+                  onToggleFavorite={handleToggleFavorite}
+                />
               ))}
             </div>
-
-            <input
-              type="text"
-              placeholder={ingredients.length === 0 ? "Type ingredients (e.g. tomato, pasta) and press Enter" : "Add more..."}
-              className="ingredient-field"
-              value={ingredientInput}
-              onChange={(e) => setIngredientInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-            />
-
-            {ingredientInput.trim() && (
-              <button
-                type="button"
-                onClick={handleAddIngredient}
-                className="chip-remove"
-                style={{ color: 'var(--accent-primary)', padding: '0 0.5rem' }}
-              >
-                <Plus size={20} />
-              </button>
-            )}
-          </div>
-
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button
-              type="submit"
-              className="btn-search"
-              disabled={searchLoading}
-              style={{ margin: 0 }}
-            >
-              <Search size={18} />
-              {searchLoading ? 'Matching...' : 'Find Recipes'}
-            </button>
-
-            {isSearched && (
-              <button
-                type="button"
-                onClick={handleClearSearch}
-                className="btn-search"
-                style={{ background: 'var(--bg-tertiary)', border: '1px solid var(--border-color)', margin: 0 }}
-              >
-                Clear Search
-              </button>
-            )}
-          </div>
-        </form>
-      </section>
-
-      {/* Recipes Catalog Grid Section */}
-      <section className="recipes-section">
-        <h2 className="section-title">
-          {isSearched ? (
-            <>
-              <Sparkles size={20} style={{ color: 'var(--accent-primary)' }} />
-              Recommended Matches ({recipes.length})
-            </>
-          ) : (
-            <>
-              <Utensils size={20} style={{ color: 'var(--accent-primary)' }} />
-              Browse Our Recipes ({recipes.length})
-            </>
           )}
-        </h2>
-
-        {error && <div className="alert alert-danger">{error}</div>}
-
-        {searchLoading ? (
-          <LoadingSpinner />
-        ) : recipes.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: '4rem 1rem', color: 'var(--text-secondary)' }}>
-            <p style={{ fontSize: '1.2rem', fontWeight: 600 }}>No matching recipes found.</p>
-            <p style={{ fontSize: '0.95rem', color: 'var(--text-muted)', marginTop: '0.5rem' }}>
-              Try entering fewer ingredients, or adding basics like butter, salt, or oil!
-            </p>
-            <button onClick={handleClearSearch} className="btn-primary" style={{ maxWidth: '200px', marginTop: '1.5rem' }}>
-              Reset Filters
-            </button>
-          </div>
-        ) : (
-          <div className="recipes-grid">
-            {recipes.map((recipe) => (
-              <RecipeCard
-                key={recipe._id}
-                recipe={recipe}
-                isFavorite={favorites.includes(recipe._id)}
-                onToggleFavorite={handleToggleFavorite}
-              />
-            ))}
-          </div>
-        )}
-      </section>
-
-      {/* User Testimonials Section */}
-      <section className="testimonials-section">
-        <h2 className="section-title" style={{ justifyContent: 'center' }}>
-          Loved by Home Cooks
-        </h2>
-        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.95rem', maxWidth: '600px', margin: '0.5rem auto 1.5rem' }}>
-          Here is what FlavorFind users say about cooking with their available ingredients.
-        </p>
-
-        <div className="testimonials-grid">
-          {/* Testimonial 1 */}
-          <div className="testimonial-card">
-            <div>
-              <div className="testimonial-stars">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p className="testimonial-quote">
-                "FlavorFind completely changed how I cook in my dorm. I just typed 'egg, bread' and made cinnamon French toast. No food waste at all!"
-              </p>
-            </div>
-            <div className="testimonial-profile">
-              <div className="testimonial-avatar">SM</div>
-              <div>
-                <h4 className="testimonial-name">Sarah Mitchell</h4>
-                <span className="testimonial-role">College Student</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonial 2 */}
-          <div className="testimonial-card">
-            <div>
-              <div className="testimonial-stars">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p className="testimonial-quote">
-                "The integration with USDA nutrition facts is incredible. I can scale recipe servings for my weekly meal prep and see the calorie count instantly."
-              </p>
-            </div>
-            <div className="testimonial-profile">
-              <div className="testimonial-avatar">DK</div>
-              <div>
-                <h4 className="testimonial-name">David K.</h4>
-                <span className="testimonial-role">Fitness Enthusiast</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Testimonial 3 */}
-          <div className="testimonial-card">
-            <div>
-              <div className="testimonial-stars">
-                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-              </div>
-              <p className="testimonial-quote">
-                "Saving recipes in my favorites folder and generating a scaled grocery shopping list saves me so much time at the supermarket."
-              </p>
-            </div>
-            <div className="testimonial-profile">
-              <div className="testimonial-avatar">PR</div>
-              <div>
-                <h4 className="testimonial-name">Priya Rao</h4>
-                <span className="testimonial-role">Working Professional</span>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
     </div>
   );
 };
+
+// Simple Utensils inline custom icon component for workflow
+const Utensils = ({ size }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round"
+  >
+    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+    <path d="M7 2v20" />
+    <path d="M21 15V2v0a5 5 0 0 0-5 5v8c0 1.1.9 2 2 2h3Z" />
+    <path d="M19 17v5" />
+  </svg>
+);
 
 export default Home;

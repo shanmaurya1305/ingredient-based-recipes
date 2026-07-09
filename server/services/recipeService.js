@@ -18,6 +18,16 @@ const getAllRecipes = async (query = {}) => {
     filters.cuisine = { $regex: new RegExp(query.cuisine, 'i') };
   }
 
+  // Support vegetarian filtering
+  if (query.isVegetarian !== undefined) {
+    filters.isVegetarian = query.isVegetarian === 'true' || query.isVegetarian === true;
+  }
+
+  // Support region filtering
+  if (query.region) {
+    filters.region = { $regex: new RegExp(query.region, 'i') };
+  }
+
   // Find all recipes matching filters
   return await Recipe.find(filters);
 };

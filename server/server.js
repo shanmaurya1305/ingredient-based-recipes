@@ -8,9 +8,27 @@ connectDB();
 
 const app = express();
 
-// Configure CORS to allow access from frontend
+// Configure CORS to allow access from both local development and production frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'https://ingredient-based-recipes.vercel.app',
+  'https://ingredient-based-recipes.vercel.app/'
+];
+
 app.use(cors({
-  origin: 'https://ingredient-based-recipes.vercel.app/', // We will restrict this to client URL in production
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, postman, or curl)
+    if (!origin) return callback(null, true);
+    
+    // In development mode, allow any local or external origin for debugging
+    if (process.env.NODE_ENV === 'development' || allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
+    }
+    
+    const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+    return callback(new Error(msg), false);
+  },
   credentials: true
 }));
 

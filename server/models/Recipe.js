@@ -86,6 +86,15 @@ const recipeSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Cuisine type is required'],
       trim: true
+    },
+    isVegetarian: {
+      type: Boolean,
+      default: true
+    },
+    region: {
+      type: String,
+      required: [true, 'Region classification is required'],
+      trim: true
     }
   },
   {

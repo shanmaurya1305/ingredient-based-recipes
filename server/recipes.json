@@ -1,544 +1,289 @@
 [
-    {
-        "title": "Aromatic Jeera Rice",
-        "description": "Fragrant steamed basmati rice tempered with cumin seeds and real ghee. Perfect with Dal Tadka.",
-        "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "basmati rice",
-                "quantity": 200,
-                "unit": "g"
-            },
-            {
-                "name": "cumin seeds",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "ghee",
-                "quantity": 1.5,
-                "unit": "tbsp"
-            },
-            {
-                "name": "water",
-                "quantity": 400,
-                "unit": "ml"
-            }
-        ],
-        "instructions": [
-            "Wash the basmati rice in cold water three times, then soak for 20 minutes and drain.",
-            "Heat ghee in a heavy-bottomed pot over medium heat. Add cumin seeds and let them splutter.",
-            "Add the drained rice and sauté gently for 1-2 minutes in the ghee.",
-            "Pour in water and add salt to taste. Bring it to a boil.",
-            "Cover with a tight lid, reduce heat to lowest setting, and cook for 12-15 minutes.",
-            "Turn off the heat and let it rest covered for 5 minutes. Fluff gently with a fork before serving."
-        ],
-        "cookingTime": 20,
-        "servings": 3,
-        "difficulty": "Easy",
-        "category": "Lunch",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Garlic Butter Naan",
-        "description": "Soft and chewy restaurant-style flatbread brushed with garlic-infused butter, cooked on a hot skillet.",
-        "image": "https://i.pinimg.com/originals/0f/8f/fc/0f8ffcd48069083389ed5e9dfda45737.webp",
-        "ingredients": [
-            {
-                "name": "wheat flour",
-                "quantity": 250,
-                "unit": "g"
-            },
-            {
-                "name": "yogurt",
-                "quantity": 3,
-                "unit": "tbsp"
-            },
-            {
-                "name": "garlic",
-                "quantity": 5,
-                "unit": "cloves"
-            },
-            {
-                "name": "butter",
-                "quantity": 30,
-                "unit": "g"
-            },
-            {
-                "name": "water",
-                "quantity": 100,
-                "unit": "ml"
-            }
-        ],
-        "instructions": [
-            "Combine flour, yogurt, a pinch of baking powder, salt, and warm water to knead a soft dough.",
-            "Cover dough with a damp cloth and let it rise/rest for 1 hour.",
-            "Divide into equal balls. Flatten and roll each ball into an oval teardrop shape.",
-            "Sprinkle finely minced garlic and fresh coriander leaves on one side, pressing them into the dough.",
-            "Heat a tawa or heavy iron skillet. Wet the back side of the naan with water and slap it onto the skillet (water helps it stick).",
-            "Once bubbles appear, flip the tawa upside down directly over the flame to char the garlic side.",
-            "Scrape off the naan, brush generously with melted butter, and serve hot."
-        ],
-        "cookingTime": 25,
-        "servings": 2,
-        "difficulty": "Medium",
-        "category": "Dinner",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Paneer Butter Masala",
-        "description": "A rich, creamy, and mildly sweet North Indian paneer curry made with tomatoes, butter, cashews, and spices.",
-        "image": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "paneer",
-                "quantity": 200,
-                "unit": "g"
-            },
-            {
-                "name": "tomato",
-                "quantity": 3,
-                "unit": "pieces"
-            },
-            {
-                "name": "onion",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "butter",
-                "quantity": 30,
-                "unit": "g"
-            },
-            {
-                "name": "heavy cream",
-                "quantity": 2,
-                "unit": "tbsp"
-            },
-            {
-                "name": "garam masala",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "cashew nuts",
-                "quantity": 10,
-                "unit": "pieces"
-            },
-            {
-                "name": "ginger garlic paste",
-                "quantity": 1,
-                "unit": "tbsp"
-            }
-        ],
-        "instructions": [
-            "Boil chopped tomatoes, onions, and cashews in a cup of water for 10 minutes, then blend into a smooth paste.",
-            "Melt butter in a pan over medium heat. Add ginger-garlic paste and sauté for 1 minute.",
-            "Pour in the tomato-cashew puree and cook for 5-6 minutes until oil begins to separate.",
-            "Add garam masala, salt, and half a cup of water. Simmer for 3 minutes.",
-            "Gently add paneer cubes, stir, and cook for 2 minutes on low heat.",
-            "Finish by swirling in heavy cream and serve hot with naan or roti."
-        ],
-        "cookingTime": 25,
-        "servings": 2,
-        "difficulty": "Medium",
-        "category": "Dinner",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Tangy Chana Masala",
-        "description": "A flavorful, protein-packed chickpea curry simmered in a tangy onion-tomato gravy with warm spices.",
-        "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "chickpeas",
-                "quantity": 250,
-                "unit": "g"
-            },
-            {
-                "name": "onion",
-                "quantity": 2,
-                "unit": "pieces"
-            },
-            {
-                "name": "tomato",
-                "quantity": 2,
-                "unit": "pieces"
-            },
-            {
-                "name": "garlic",
-                "quantity": 3,
-                "unit": "cloves"
-            },
-            {
-                "name": "cumin seeds",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "coriander powder",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "garam masala",
-                "quantity": 0.5,
-                "unit": "tsp"
-            },
-            {
-                "name": "lemon",
-                "quantity": 0.5,
-                "unit": "piece"
-            }
-        ],
-        "instructions": [
-            "Soak chickpeas overnight and boil until soft (or use canned chickpeas).",
-            "Heat oil in a pan, add cumin seeds. Once they splutter, add finely chopped onions and sauté until golden brown.",
-            "Add minced garlic and ginger, cook for 1 minute, then add chopped tomatoes and spices. Cook until tomatoes are mushy.",
-            "Add the boiled chickpeas along with 1 cup of cooking water. Mash a few chickpeas with a spatula to thicken the gravy.",
-            "Simmer for 10-12 minutes on low heat until spices are fully absorbed.",
-            "Squeeze fresh lemon juice over the top, stir, and serve with bhatura or steamed rice."
-        ],
-        "cookingTime": 30,
-        "servings": 3,
-        "difficulty": "Easy",
-        "category": "Lunch",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Dhaba Style Dal Tadka",
-        "description": "Creamy yellow lentils (toor dal) cooked with spices and tempered with ghee, cumin seeds, garlic, and red chilies.",
-        "image": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "yellow lentils",
-                "quantity": 150,
-                "unit": "g"
-            },
-            {
-                "name": "onion",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "tomato",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "garlic",
-                "quantity": 4,
-                "unit": "cloves"
-            },
-            {
-                "name": "cumin seeds",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "ghee",
-                "quantity": 2,
-                "unit": "tbsp"
-            },
-            {
-                "name": "turmeric powder",
-                "quantity": 0.5,
-                "unit": "tsp"
-            },
-            {
-                "name": "cilantro",
-                "quantity": 2,
-                "unit": "tbsp"
-            }
-        ],
-        "instructions": [
-            "Wash yellow lentils. Pressure cook or boil them in water with turmeric powder and salt until soft.",
-            "In a pan, heat ghee. Add cumin seeds and chopped garlic. Sauté until garlic turns golden brown.",
-            "Add chopped onions and fry until translucent. Add chopped tomatoes and cook for 3 minutes.",
-            "Pour the boiled dal into the pan, mix well, and bring to a simmer. Adjust salt and thickness with water.",
-            "For the final tempering (tadka): Heat a spoonful of ghee in a tiny pan, add cumin, dried red chili, and pour it sizzling over the dal.",
-            "Garnish with chopped cilantro and serve with jeera rice."
-        ],
-        "cookingTime": 20,
-        "servings": 3,
-        "difficulty": "Easy",
-        "category": "Lunch",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Homestyle Aloo Gobi",
-        "description": "A classic dry Indian side dish made of cauliflower florets and potato cubes stir-fried with turmeric and ginger.",
-        "image": "https://images.unsplash.com/photo-1626132647523-66f5bf380027?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "potato",
-                "quantity": 2,
-                "unit": "pieces"
-            },
-            {
-                "name": "cauliflower",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "onion",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "turmeric powder",
-                "quantity": 0.5,
-                "unit": "tsp"
-            },
-            {
-                "name": "cumin seeds",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "garam masala",
-                "quantity": 0.5,
-                "unit": "tsp"
-            },
-            {
-                "name": "ginger",
-                "quantity": 1,
-                "unit": "tsp"
-            }
-        ],
-        "instructions": [
-            "Cut potatoes into cubes and cauliflower into medium-sized florets.",
-            "Heat oil in a pan, add cumin seeds and finely grated ginger. Fry for 30 seconds.",
-            "Add chopped onions and sauté until soft. Add potatoes, cauliflower, turmeric, and salt.",
-            "Cover the pan and cook on low heat for 15 minutes, stirring occasionally so it doesn't burn, until vegetables are tender.",
-            "Sprinkle garam masala and chopped coriander leaves over the dry stir-fry, toss gently, and serve."
-        ],
-        "cookingTime": 20,
-        "servings": 4,
-        "difficulty": "Easy",
-        "category": "Lunch",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Spiced Masala Chai",
-        "description": "The quintessential Indian milk tea brewed with crushed fresh ginger, cardamom pods, and strong black tea leaves.",
-        "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "milk",
-                "quantity": 200,
-                "unit": "ml"
-            },
-            {
-                "name": "water",
-                "quantity": 200,
-                "unit": "ml"
-            },
-            {
-                "name": "tea leaves",
-                "quantity": 2,
-                "unit": "tsp"
-            },
-            {
-                "name": "sugar",
-                "quantity": 2,
-                "unit": "tsp"
-            },
-            {
-                "name": "ginger",
-                "quantity": 1,
-                "unit": "slice"
-            },
-            {
-                "name": "cardamom",
-                "quantity": 2,
-                "unit": "pieces"
-            }
-        ],
-        "instructions": [
-            "Boil water in a saucepan. Add crushed ginger and slightly crushed cardamom pods, simmering for 2 minutes to extract flavors.",
-            "Add black tea leaves and sugar. Let the water boil for another minute.",
-            "Pour in the milk and bring the mixture to a rolling boil.",
-            "Once it boils, reduce heat to low and simmer for 2 minutes until it develops a rich caramel-brown color.",
-            "Strain the hot masala chai through a sieve directly into cups and serve with biscuits."
-        ],
-        "cookingTime": 8,
-        "servings": 2,
-        "difficulty": "Easy",
-        "category": "Breakfast",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Classic Chicken Tikka Masala",
-        "description": "Tender pieces of grilled chicken tikka folded into a creamy, spiced, tomato-based gravy.",
-        "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "chicken breast",
-                "quantity": 400,
-                "unit": "g"
-            },
-            {
-                "name": "yogurt",
-                "quantity": 100,
-                "unit": "g"
-            },
-            {
-                "name": "onion",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "ginger garlic paste",
-                "quantity": 1,
-                "unit": "tbsp"
-            },
-            {
-                "name": "garam masala",
-                "quantity": 1,
-                "unit": "tsp"
-            },
-            {
-                "name": "butter",
-                "quantity": 20,
-                "unit": "g"
-            },
-            {
-                "name": "heavy cream",
-                "quantity": 3,
-                "unit": "tbsp"
-            }
-        ],
-        "instructions": [
-            "Cut chicken into cubes, marinate with yogurt, garam masala, salt, and ginger-garlic paste for 30 minutes, then pan-sear until browned.",
-            "In a separate pan, melt butter, sauté chopped onions until brown, then add ginger-garlic paste.",
-            "Add tomato puree and spices, cooking until grease separates.",
-            "Add grilled chicken pieces to the gravy along with half a cup of water. Cover and simmer for 8 minutes.",
-            "Swirl in the heavy cream and serve warm with naan."
-        ],
-        "cookingTime": 35,
-        "servings": 3,
-        "difficulty": "Medium",
-        "category": "Dinner",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Restaurant Style Palak Paneer",
-        "description": "Soft paneer cubes cooked in a vibrant, creamy spinach gravy spiced with garlic, ginger, and green chilies.",
-        "image": "https://images.unsplash.com/photo-1618040996337-56904b7850b9?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "spinach",
-                "quantity": 250,
-                "unit": "g"
-            },
-            {
-                "name": "paneer",
-                "quantity": 200,
-                "unit": "g"
-            },
-            {
-                "name": "onion",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "tomato",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "garlic",
-                "quantity": 3,
-                "unit": "cloves"
-            },
-            {
-                "name": "heavy cream",
-                "quantity": 1,
-                "unit": "tbsp"
-            },
-            {
-                "name": "garam masala",
-                "quantity": 0.5,
-                "unit": "tsp"
-            }
-        ],
-        "instructions": [
-            "Blanch spinach leaves in boiling water for 2 minutes, plunge into cold water to retain green color, and blend to a smooth puree.",
-            "Sauté chopped onions, garlic, and ginger in a pan until brown. Add chopped tomato and cook until soft.",
-            "Pour in the spinach puree, add garam masala, salt, and simmer for 5 minutes.",
-            "Stir in the paneer cubes and let them warm through in the spinach gravy for 2 minutes.",
-            "Drizzle with heavy cream and serve."
-        ],
-        "cookingTime": 25,
-        "servings": 3,
-        "difficulty": "Medium",
-        "category": "Dinner",
-        "cuisine": "Indian"
-    },
-    {
-        "title": "Fragrant Veg Biryani",
-        "description": "A majestic layered rice dish made with aromatic basmati rice, mixed vegetables, yogurt, and warm biryani spices.",
-        "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=60",
-        "ingredients": [
-            {
-                "name": "basmati rice",
-                "quantity": 200,
-                "unit": "g"
-            },
-            {
-                "name": "carrot",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "green peas",
-                "quantity": 50,
-                "unit": "g"
-            },
-            {
-                "name": "potato",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "yogurt",
-                "quantity": 3,
-                "unit": "tbsp"
-            },
-            {
-                "name": "onion",
-                "quantity": 1,
-                "unit": "piece"
-            },
-            {
-                "name": "biryani masala",
-                "quantity": 1,
-                "unit": "tbsp"
-            },
-            {
-                "name": "ghee",
-                "quantity": 2,
-                "unit": "tbsp"
-            },
-            {
-                "name": "mint leaves",
-                "quantity": 10,
-                "unit": "leaves"
-            }
-        ],
-        "instructions": [
-            "Wash and parboil basmati rice until 70% cooked. Drain and set aside.",
-            "Sauté vegetables (carrots, potatoes, peas) with onions, yogurt, and biryani masala in a pot until tender.",
-            "Layer the cooked vegetables at the bottom of a heavy pot, then spread the parboiled rice evenly over it.",
-            "Top with ghee, mint leaves, fried onions, and a splash of saffron-infused milk.",
-            "Seal the pot with lid and cook on low heat (dum) for 15 minutes to allow aromas to blend.",
-            "Fluff gently and serve with raita."
-        ],
-        "cookingTime": 40,
-        "servings": 3,
-        "difficulty": "Hard",
-        "category": "Dinner",
-        "cuisine": "Indian"
-    }
+  {
+    "title": "Classic Paneer Tikka",
+    "description": "Tender cottage cheese cubes marinated in spiced yogurt, skewered with bell peppers and onions, and charred to perfection.",
+    "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "paneer", "quantity": 250, "unit": "g" },
+      { "name": "yogurt", "quantity": 100, "unit": "g" },
+      { "name": "bell pepper", "quantity": 1, "unit": "piece" },
+      { "name": "onion", "quantity": 1, "unit": "piece" },
+      { "name": "ginger garlic paste", "quantity": 1, "unit": "tbsp" },
+      { "name": "garam masala", "quantity": 1, "unit": "tsp" },
+      { "name": "mustard oil", "quantity": 1, "unit": "tbsp" },
+      { "name": "lemon", "quantity": 0.5, "unit": "piece" }
+    ],
+    "instructions": [
+      "Cut paneer, bell pepper, and onion into 1-inch squares.",
+      "In a bowl, mix yogurt, mustard oil, ginger-garlic paste, garam masala, and salt.",
+      "Toss the paneer and vegetables in the marinade and let it rest for 20 minutes.",
+      "Skew the paneer cubes alternately with onion and bell pepper pieces.",
+      "Grill in an oven or on a hot tawa for 10-12 minutes, turning occasionally until charred on the edges.",
+      "Sprinkle chaat masala and squeeze fresh lemon juice on top before serving."
+    ],
+    "cookingTime": 25,
+    "servings": 3,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "Punjabi"
+  },
+  {
+    "title": "Malabar Fish Curry",
+    "description": "A traditional coastal Kerala style fish curry simmered in raw coconut milk, sour tamarind, and warm spices.",
+    "image": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "fish fillets", "quantity": 400, "unit": "g" },
+      { "name": "coconut milk", "quantity": 200, "unit": "ml" },
+      { "name": "onion", "quantity": 1, "unit": "piece" },
+      { "name": "tomato", "quantity": 1, "unit": "piece" },
+      { "name": "tamarind paste", "quantity": 1, "unit": "tbsp" },
+      { "name": "mustard seeds", "quantity": 1, "unit": "tsp" },
+      { "name": "curry leaves", "quantity": 10, "unit": "leaves" },
+      { "name": "turmeric powder", "quantity": 0.5, "unit": "tsp" },
+      { "name": "oil", "quantity": 2, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Heat oil in a deep pan, add mustard seeds and let them splutter. Add curry leaves and sliced onion, sautéing until soft.",
+      "Add ginger-garlic paste and chopped tomato, cooking until the tomato is mushy.",
+      "Add tamarind paste, turmeric powder, and salt. Pour in 1 cup of water and bring to a simmer.",
+      "Gently place the fish fillets in the gravy and cook on medium-low heat for 6-8 minutes.",
+      "Pour in the fresh coconut milk, swirl the pan gently (do not use a spoon to avoid breaking the fish), and simmer for 2 minutes on low heat.",
+      "Serve warm with steamed basmati rice."
+    ],
+    "cookingTime": 30,
+    "servings": 3,
+    "difficulty": "Medium",
+    "category": "Lunch",
+    "cuisine": "Indian",
+    "isVegetarian": false,
+    "region": "Kerala"
+  },
+  {
+    "title": "Dal Baati Churma",
+    "description": "A classic Rajasthani three-in-one meal featuring baked whole wheat dough balls (baati), mixed spiced lentils (dal), and sweet churma.",
+    "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "wheat flour", "quantity": 200, "unit": "g" },
+      { "name": "yellow lentils", "quantity": 100, "unit": "g" },
+      { "name": "ghee", "quantity": 100, "unit": "g" },
+      { "name": "sugar", "quantity": 50, "unit": "g" },
+      { "name": "cardamom", "quantity": 0.5, "unit": "tsp" },
+      { "name": "cumin seeds", "quantity": 1, "unit": "tsp" },
+      { "name": "ginger", "quantity": 1, "unit": "tsp" }
+    ],
+    "instructions": [
+      "To make Baatis: Knead wheat flour with ghee, salt, and warm water into a tight dough. Shape into round balls and bake in a tandoor or preheated oven at 190°C for 30 minutes until golden.",
+      "To make Dal: Pressure cook the yellow lentils with turmeric and salt. Temper with ghee, cumin seeds, grated ginger, and red chilies in a separate pan, then combine with the dal.",
+      "To make Churma: Crush 2 baked baatis into a fine powder. Sauté in ghee for 2 minutes, let it cool, and mix in sugar and cardamom powder.",
+      "Dip the hot baatis in melted ghee and serve along with the hot spiced dal and sweet churma."
+    ],
+    "cookingTime": 45,
+    "servings": 4,
+    "difficulty": "Hard",
+    "category": "Lunch",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "Rajasthani"
+  },
+  {
+    "title": "Kolkata Fish Fry",
+    "description": "Crispy, golden Bengali street snack of breaded fish fillets marinated in coriander-mint green paste and deep fried.",
+    "image": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "fish fillets", "quantity": 300, "unit": "g" },
+      { "name": "breadcrumbs", "quantity": 100, "unit": "g" },
+      { "name": "egg", "quantity": 1, "unit": "piece" },
+      { "name": "ginger garlic paste", "quantity": 1, "unit": "tbsp" },
+      { "name": "green chili", "quantity": 1, "unit": "piece" },
+      { "name": "cilantro", "quantity": 2, "unit": "tbsp" },
+      { "name": "lemon", "quantity": 0.5, "unit": "piece" },
+      { "name": "oil", "quantity": 200, "unit": "ml" }
+    ],
+    "instructions": [
+      "Blend cilantro, green chili, ginger, and garlic into a smooth green paste.",
+      "Marinate fish fillets with green paste, lemon juice, and salt for 30 minutes.",
+      "Beat the egg in a bowl. Spread breadcrumbs on a flat plate.",
+      "Dip each marinated fish fillet in the egg wash, then coat generously with breadcrumbs, pressing to form a flat cutlet shape.",
+      "Heat cooking oil in a deep pan. Deep fry the breaded cutlets on medium heat until golden brown and crispy on both sides.",
+      "Serve hot with kasundi (mustard sauce) and onion rings."
+    ],
+    "cookingTime": 20,
+    "servings": 2,
+    "difficulty": "Easy",
+    "category": "Lunch",
+    "cuisine": "Indian",
+    "isVegetarian": false,
+    "region": "West Bengal"
+  },
+  {
+    "title": "Awadhi Dum Biryani",
+    "description": "A majestic and highly fragrant royal rice dish layered with marinated chicken, saffron milk, and aromatic basmati rice.",
+    "image": "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "basmati rice", "quantity": 250, "unit": "g" },
+      { "name": "chicken breast", "quantity": 300, "unit": "g" },
+      { "name": "yogurt", "quantity": 4, "unit": "tbsp" },
+      { "name": "onion", "quantity": 2, "unit": "pieces" },
+      { "name": "ghee", "quantity": 3, "unit": "tbsp" },
+      { "name": "biryani masala", "quantity": 1, "unit": "tbsp" },
+      { "name": "saffron", "quantity": 1, "unit": "pinch" },
+      { "name": "mint leaves", "quantity": 10, "unit": "leaves" }
+    ],
+    "instructions": [
+      "Wash and soak basmati rice for 30 minutes, then parboil until 70% cooked and drain.",
+      "Marinate chicken cubes with yogurt, biryani masala, ginger-garlic paste, and salt for 1 hour.",
+      "Deep fry sliced onions until crispy and brown (birista). Set aside.",
+      "Cook marinated chicken in a pot with ghee until tender. Layer parboiled rice on top of the chicken.",
+      "Sprinkle fried onions, fresh mint leaves, ghee, and saffron-infused milk over the rice layer.",
+      "Seal the pot with dough or a tight lid and cook on lowest heat (dum) for 15-20 minutes until rice is fully fluffy.",
+      "Gently fluff the biryani and serve hot with raita."
+    ],
+    "cookingTime": 50,
+    "servings": 5,
+    "difficulty": "Hard",
+    "category": "Dinner",
+    "cuisine": "Indian",
+    "isVegetarian": false,
+    "region": "Uttar Pradesh"
+  },
+  {
+    "title": "Classic Tiffin Set",
+    "description": "A comforting traditional South Indian breakfast combo featuring soft steamed idlis, crispy urad dal vadas, and hot lentil sambar.",
+    "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "rice batter", "quantity": 300, "unit": "g" },
+      { "name": "yellow lentils", "quantity": 100, "unit": "g" },
+      { "name": "drumstick", "quantity": 1, "unit": "piece" },
+      { "name": "mustard seeds", "quantity": 1, "unit": "tsp" },
+      { "name": "tamarind paste", "quantity": 1, "unit": "tbsp" },
+      { "name": "coconut", "quantity": 50, "unit": "g" },
+      { "name": "oil", "quantity": 1, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "To make Idlis: Pour fermented rice batter into greased idli molds and steam for 10-12 minutes.",
+      "To make Sambar: Cook yellow lentils with chopped drumsticks, tomatoes, tamarind, and sambar powder until soft.",
+      "To make Coconut Chutney: Blend grated coconut, roasted gram, green chilies, and salt. Temper with oil, mustard seeds, and curry leaves.",
+      "Plate the hot idlis and vadas together and serve with warm sambar and coconut chutney."
+    ],
+    "cookingTime": 30,
+    "servings": 2,
+    "difficulty": "Medium",
+    "category": "Breakfast",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "South Indian"
+  },
+  {
+    "title": "Aromatic Jeera Rice",
+    "description": "Fragrant steamed basmati rice tempered with cumin seeds and real ghee. Perfect with Dal Tadka.",
+    "image": "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&auto=format&fit=crop&q=60",
+    "ingredients": [
+      { "name": "basmati rice", "quantity": 200, "unit": "g" },
+      { "name": "cumin seeds", "quantity": 1, "unit": "tsp" },
+      { "name": "ghee", "quantity": 1.5, "unit": "tbsp" },
+      { "name": "water", "quantity": 400, "unit": "ml" }
+    ],
+    "instructions": [
+      "Wash the basmati rice in cold water three times, then soak for 20 minutes and drain.",
+      "Heat ghee in a heavy-bottomed pot over medium heat. Add cumin seeds and let them splutter.",
+      "Add the drained rice and sauté gently for 1-2 minutes in the ghee.",
+      "Pour in water and add salt to taste. Bring it to a boil.",
+      "Cover with a tight lid, reduce heat to lowest setting, and cook for 12-15 minutes.",
+      "Turn off the heat and let it rest covered for 5 minutes. Fluff gently with a fork before serving."
+    ],
+    "cookingTime": 20,
+    "servings": 3,
+    "difficulty": "Easy",
+    "category": "Lunch",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "North Indian"
+  },
+  {
+    "title": "Garlic Butter Naan",
+    "description": "Soft and chewy restaurant-style flatbread brushed with garlic-infused butter, cooked on a hot skillet.",
+    "image": "https://i.pinimg.com/originals/0f/8f/fc/0f8ffcd48069083389ed5e9dfda45737.webp",
+    "ingredients": [
+      { "name": "wheat flour", "quantity": 250, "unit": "g" },
+      { "name": "yogurt", "quantity": 3, "unit": "tbsp" },
+      { "name": "garlic", "quantity": 5, "unit": "cloves" },
+      { "name": "butter", "quantity": 30, "unit": "g" },
+      { "name": "water", "quantity": 100, "unit": "ml" }
+    ],
+    "instructions": [
+      "Combine flour, yogurt, a pinch of baking powder, salt, and warm water to knead a soft dough.",
+      "Cover dough with a damp cloth and let it rise/rest for 1 hour.",
+      "Divide into equal balls. Flatten and roll each ball into an oval teardrop shape.",
+      "Sprinkle finely minced garlic and fresh coriander leaves on one side, pressing them into the dough.",
+      "Heat a tawa or heavy iron skillet. Wet the back side of the naan with water and slap it onto the skillet (water helps it stick).",
+      "Once bubbles appear, flip the tawa upside down directly over the flame to char the garlic side.",
+      "Scrape off the naan, brush generously with melted butter, and serve hot."
+    ],
+    "cookingTime": 25,
+    "servings": 2,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "North Indian"
+  },
+  {
+    "title": "Spiced Masala Chai",
+    "description": "The quintessential Indian milk tea brewed with crushed fresh ginger, cardamom pods, and strong black tea leaves.",
+    "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&auto=format&fit=crop&q=60",
+    "ingredients": [
+      { "name": "milk", "quantity": 200, "unit": "ml" },
+      { "name": "water", "quantity": 200, "unit": "ml" },
+      { "name": "tea leaves", "quantity": 2, "unit": "tsp" },
+      { "name": "sugar", "quantity": 2, "unit": "tsp" },
+      { "name": "ginger", "quantity": 1, "unit": "slice" },
+      { "name": "cardamom", "quantity": 2, "unit": "pieces" }
+    ],
+    "instructions": [
+      "Boil water in a saucepan. Add crushed ginger and slightly crushed cardamom pods, simmering for 2 minutes to extract flavors.",
+      "Add black tea leaves and sugar. Let the water boil for another minute.",
+      "Pour in the milk and bring the mixture to a rolling boil.",
+      "Once it boils, reduce heat to low and simmer for 2 minutes until it develops a rich caramel-brown color.",
+      "Strain the hot masala chai through a sieve directly into cups and serve with biscuits."
+    ],
+    "cookingTime": 8,
+    "servings": 2,
+    "difficulty": "Easy",
+    "category": "Breakfast",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "North Indian"
+  },
+  {
+    "title": "Dhaba Style Dal Tadka",
+    "description": "Creamy yellow lentils (toor dal) cooked with spices and tempered with ghee, cumin seeds, garlic, and red chilies.",
+    "image": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=800&auto=format&fit=crop&q=80",
+    "ingredients": [
+      { "name": "yellow lentils", "quantity": 150, "unit": "g" },
+      { "name": "onion", "quantity": 1, "unit": "piece" },
+      { "name": "tomato", "quantity": 1, "unit": "piece" },
+      { "name": "garlic", "quantity": 4, "unit": "cloves" },
+      { "name": "cumin seeds", "quantity": 1, "unit": "tsp" },
+      { "name": "ghee", "quantity": 2, "unit": "tbsp" },
+      { "name": "turmeric powder", "quantity": 0.5, "unit": "tsp" },
+      { "name": "cilantro", "quantity": 2, "unit": "tbsp" }
+    ],
+    "instructions": [
+      "Wash yellow lentils. Pressure cook or boil them in water with turmeric powder and salt until soft.",
+      "In a pan, heat ghee. Add cumin seeds and chopped garlic. Sauté until garlic turns golden brown.",
+      "Add chopped onions and fry until translucent. Add chopped tomatoes and cook for 3 minutes.",
+      "Pour the boiled dal into the pan, mix well, and bring to a simmer. Adjust salt and thickness with water.",
+      "For the final tempering (tadka): Heat a spoonful of ghee in a tiny pan, add cumin, dried red chili, and pour it sizzling over the dal.",
+      "Garnish with chopped cilantro and serve with jeera rice."
+    ],
+    "cookingTime": 20,
+    "servings": 3,
+    "difficulty": "Easy",
+    "category": "Lunch",
+    "cuisine": "Indian",
+    "isVegetarian": true,
+    "region": "North Indian"
+  }
 ]
