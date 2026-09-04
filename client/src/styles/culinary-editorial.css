@@ -1,0 +1,1098 @@
+/* ==========================================================================
+   CULINARY EDITORIAL DESIGN SYSTEM - RECIPE DETAIL PAGE
+   Inspired by Cereal, Cook's Illustrated, and Kinfolk
+   ========================================================================== */
+
+:root {
+  /* Surface Palette */
+  --culinary-surface: #fcf9f8;
+  --culinary-surface-dim: #dcd9d9;
+  --culinary-surface-bright: #fcf9f8;
+  --culinary-surface-lowest: #ffffff;
+  --culinary-surface-low: #f6f3f2;
+  --culinary-surface-container: #f0eded;
+  --culinary-surface-high: #eae7e7;
+  --culinary-surface-highest: #e5e2e1;
+  
+  /* Text & Neutrals */
+  --culinary-on-surface: #1b1b1c;        /* Deep Culinary Charcoal */
+  --culinary-on-surface-variant: #5a4138;/* Warm Graphite / Terracotta Charcoal */
+  --culinary-sandstone: #8e7166;         /* Soft Sandstone Muted */
+  --culinary-sandstone-light: #a8a29e;
+  
+  /* Borders & Hairlines */
+  --culinary-border: #efeae2;           /* Warm pressed sand border */
+  --culinary-border-variant: #e2bfb2;
+  --culinary-border-dark: #d5c8bb;
+
+  /* Accents */
+  --culinary-primary: #a33900;          /* Deep Saffron */
+  --culinary-primary-container: #cc4900;
+  --culinary-saffron: #ea580c;          /* Roasted Citrus CTA */
+  --culinary-saffron-hover: #c2410c;
+  --culinary-secondary: #ac3400;        /* Smoked Paprika */
+  --culinary-secondary-container: #fd6b36;
+  --culinary-tertiary: #904821;         /* Caramelized Umami */
+  
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  
+  /* Radius & Shadows */
+  --radius-editorial-sm: 0.25rem;       /* 4px architectural */
+  --radius-editorial-md: 0.375rem;      /* 6px */
+  --radius-editorial-lg: 0.5rem;        /* 8px tailored geometry */
+  --radius-editorial-full: 9999px;
+  
+  --shadow-editorial-flat: none;
+  --shadow-editorial-low: 0 4px 20px -2px rgba(120, 53, 15, 0.04), 0 2px 6px -1px rgba(30, 30, 30, 0.03);
+  --shadow-editorial-raised: 0 12px 32px -4px rgba(120, 53, 15, 0.08), 0 4px 12px -2px rgba(30, 30, 30, 0.04);
+}
+
+/* Base Editorial Page Wrapper */
+.culinary-detail-page {
+  background-color: var(--culinary-surface);
+  color: var(--culinary-on-surface);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Page Container (Max 80rem / 1280px) */
+.culinary-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .culinary-container {
+    padding: 0 2rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   1. BREADCRUMBS & TOP NAV STRIP
+   -------------------------------------------------------------------------- */
+.editorial-breadcrumb-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0 1rem;
+  border-bottom: 1px solid var(--culinary-border);
+  margin-bottom: 2rem;
+}
+
+.editorial-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem; /* body-sm */
+  font-weight: 500;
+  color: var(--culinary-on-surface-variant);
+}
+
+.editorial-breadcrumb a {
+  color: var(--culinary-on-surface-variant);
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.editorial-breadcrumb a:hover {
+  color: var(--culinary-saffron);
+}
+
+.editorial-breadcrumb-sep {
+  color: var(--culinary-border-dark);
+}
+
+.editorial-action-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. HEADER BLOCK (Title, Description, Quick Specs & Eyebrows)
+   -------------------------------------------------------------------------- */
+.editorial-header-block {
+  margin-bottom: 2.5rem;
+}
+
+.editorial-eyebrows {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.editorial-tag {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem; /* label-sm */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--radius-editorial-sm);
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  color: var(--culinary-on-surface);
+}
+
+.editorial-tag.primary-tag {
+  color: var(--culinary-primary);
+  border-color: var(--culinary-border-variant);
+  background-color: #fff6f2;
+}
+
+.editorial-tag.veg-tag {
+  color: #2e7d32;
+  border-color: #c8e6c9;
+  background-color: #f1f8e9;
+}
+
+.editorial-tag.nonveg-tag {
+  color: #c62828;
+  border-color: #ffcdd2;
+  background-color: #ffebee;
+}
+
+/* Main Display Title */
+.editorial-display-title {
+  font-family: var(--font-serif);
+  font-size: 2.375rem; /* mobile */
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--culinary-on-surface);
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .editorial-display-title {
+    font-size: 3.5rem; /* 56px display-xl */
+    letter-spacing: -0.02em;
+  }
+}
+
+.editorial-lead-description {
+  font-size: 1.125rem; /* body-lg */
+  line-height: 1.6;
+  color: var(--culinary-on-surface-variant);
+  max-width: 48rem;
+  margin-bottom: 1.75rem;
+  font-weight: 400;
+}
+
+/* Specs Bar (Capsule Pills) */
+.editorial-specs-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.editorial-spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-full);
+  padding: 0.4rem 0.85rem;
+  font-size: 0.8125rem;
+  color: var(--culinary-on-surface-variant);
+  box-shadow: var(--shadow-editorial-low);
+}
+
+.editorial-spec-pill svg {
+  color: var(--culinary-saffron);
+}
+
+.editorial-spec-val {
+  font-weight: 700;
+  color: var(--culinary-on-surface);
+}
+
+/* --------------------------------------------------------------------------
+   3. ASYMMETRICAL 7:5 EDITORIAL GRID
+   -------------------------------------------------------------------------- */
+.culinary-main-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .culinary-main-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 3rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. LEFT COLUMN (NARRATIVE, HERO IMAGE & INSTRUCTIONS)
+   -------------------------------------------------------------------------- */
+.editorial-narrative-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Hero Image Card */
+.editorial-hero-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 60%; /* 16:9 - 4:3 balance */
+  border-radius: var(--radius-editorial-lg);
+  overflow: hidden;
+  background-color: var(--culinary-surface-container);
+  border: 1px solid var(--culinary-border);
+  box-shadow: var(--shadow-editorial-low);
+}
+
+.editorial-hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-hero-frame:hover .editorial-hero-img {
+  transform: scale(1.02);
+}
+
+/* Image overlay subtle matte border */
+.editorial-hero-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-editorial-lg);
+  border: 1px solid rgba(30, 30, 30, 0.08);
+  pointer-events: none;
+}
+
+.editorial-hero-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(252, 249, 248, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--culinary-border);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-editorial-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--culinary-on-surface);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Section Titles */
+.editorial-section-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem; /* headline-md */
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--culinary-on-surface);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editorial-section-subtitle {
+  font-size: 0.875rem;
+  color: var(--culinary-sandstone);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+/* Cooking Instructions Timeline */
+.editorial-instructions-block {
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-editorial-low);
+}
+
+@media (min-width: 768px) {
+  .editorial-instructions-block {
+    padding: 2.25rem;
+  }
+}
+
+.editorial-progress-bar-container {
+  background-color: var(--culinary-surface-low);
+  border-radius: var(--radius-editorial-full);
+  height: 6px;
+  width: 100%;
+  margin: 1rem 0 1.75rem;
+  overflow: hidden;
+}
+
+.editorial-progress-fill {
+  background: linear-gradient(90deg, var(--culinary-primary) 0%, var(--culinary-saffron) 100%);
+  height: 100%;
+  border-radius: var(--radius-editorial-full);
+  transition: width 0.3s ease;
+}
+
+.editorial-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.editorial-step-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-md);
+  background-color: var(--culinary-surface-lowest);
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.editorial-step-card:hover {
+  border-color: var(--culinary-border-variant);
+  box-shadow: 0 4px 14px rgba(163, 57, 0, 0.05);
+}
+
+.editorial-step-card.is-completed {
+  background-color: var(--culinary-surface-low);
+  border-color: var(--culinary-border);
+  opacity: 0.75;
+}
+
+.editorial-step-card.is-completed .editorial-step-text {
+  color: var(--culinary-sandstone-light);
+  text-decoration: line-through;
+}
+
+.editorial-step-num {
+  font-family: var(--font-serif);
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--culinary-primary-container);
+  opacity: 0.35;
+  min-width: 2.5rem;
+  user-select: none;
+}
+
+.editorial-step-card.is-completed .editorial-step-num {
+  opacity: 0.15;
+}
+
+.editorial-step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.editorial-step-text {
+  font-size: 1rem; /* body-md */
+  line-height: 1.65;
+  color: var(--culinary-on-surface);
+}
+
+.editorial-step-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--culinary-border);
+}
+
+.editorial-step-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--culinary-on-surface-variant);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.editorial-step-toggle:hover {
+  color: var(--culinary-saffron);
+}
+
+.editorial-step-toggle.checked {
+  color: #2e7d32;
+}
+
+/* Chef's Notes Parchment Box */
+.editorial-chef-notes {
+  background-color: #fffcf7;
+  border: 1px solid #f2e3d5;
+  border-left: 4px solid var(--culinary-saffron);
+  border-radius: var(--radius-editorial-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-editorial-low);
+}
+
+.editorial-chef-notes-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--culinary-primary);
+  margin-bottom: 0.5rem;
+}
+
+.editorial-chef-notes-body {
+  font-size: 0.9375rem;
+  color: var(--culinary-on-surface-variant);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   5. RIGHT COLUMN (UTILITY & INGREDIENTS SIDEBAR - STICKY)
+   -------------------------------------------------------------------------- */
+.editorial-sidebar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .editorial-sidebar-sticky {
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+
+/* Ingredients Checklist Container */
+.editorial-ingredients-card {
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-editorial-low);
+}
+
+.editorial-ingredients-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--culinary-border);
+  margin-bottom: 1.25rem;
+}
+
+.editorial-ingredients-title {
+  font-family: var(--font-serif);
+  font-size: 1.375rem; /* headline-sm */
+  font-weight: 600;
+  color: var(--culinary-on-surface);
+}
+
+.editorial-ingredients-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--culinary-sandstone);
+  background-color: var(--culinary-surface-low);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-editorial-full);
+}
+
+/* Servings Scaler Widget */
+.editorial-scaler-box {
+  background-color: var(--culinary-surface-low);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-md);
+  padding: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.editorial-scaler-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.editorial-scaler-label {
+  font-size: 0.8125rem; /* label-md */
+  font-weight: 600;
+  color: var(--culinary-on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.editorial-scaler-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--culinary-primary);
+  background-color: #fff3ec;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-editorial-sm);
+  border: 1px solid #ffd8c8;
+}
+
+.editorial-scaler-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-editorial-scale {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-editorial-sm);
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  color: var(--culinary-on-surface);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-editorial-scale:hover {
+  background-color: var(--culinary-saffron);
+  border-color: var(--culinary-saffron-hover);
+  color: #ffffff;
+}
+
+.editorial-servings-input {
+  width: 60px;
+  height: 34px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--culinary-on-surface);
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-sm);
+}
+
+.editorial-servings-input:focus {
+  border-color: var(--culinary-saffron);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(234, 88, 12, 0.15);
+}
+
+/* Scaler Presets Bar */
+.editorial-scaler-presets {
+  display: flex;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--culinary-border);
+}
+
+.btn-preset-chip {
+  flex: 1;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  text-align: center;
+  border-radius: var(--radius-editorial-sm);
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  color: var(--culinary-on-surface-variant);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-preset-chip:hover,
+.btn-preset-chip.active {
+  background-color: var(--culinary-on-surface);
+  color: #ffffff;
+  border-color: var(--culinary-on-surface);
+}
+
+/* Checklist Items */
+.editorial-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.editorial-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: var(--radius-editorial-sm);
+  border: 1px solid transparent;
+  background-color: transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.editorial-check-item:hover {
+  background-color: var(--culinary-surface-low);
+  border-color: var(--culinary-border);
+}
+
+.editorial-check-item.checked {
+  opacity: 0.65;
+}
+
+.editorial-check-item.checked .editorial-ing-name {
+  color: var(--culinary-sandstone-light);
+  text-decoration: line-through;
+}
+
+/* Custom Checkbox */
+.editorial-custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--culinary-border-dark);
+  border-radius: var(--radius-editorial-sm);
+  background-color: var(--culinary-surface-lowest);
+  cursor: pointer;
+  position: relative;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.editorial-custom-checkbox:checked {
+  background-color: var(--culinary-saffron);
+  border-color: var(--culinary-saffron);
+}
+
+.editorial-custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.editorial-ing-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.4;
+}
+
+.editorial-ing-qty {
+  font-weight: 700;
+  color: var(--culinary-on-surface);
+  font-size: 0.9375rem;
+}
+
+.editorial-ing-name {
+  font-weight: 400;
+  color: var(--culinary-on-surface);
+  font-size: 0.9375rem;
+  text-transform: capitalize;
+}
+
+/* --------------------------------------------------------------------------
+   6. NUTRITION DATA VISUALIZATION & USDA LABEL
+   -------------------------------------------------------------------------- */
+.editorial-nutrition-card {
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-editorial-low);
+}
+
+.editorial-nutrition-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.editorial-nutrition-title {
+  font-family: var(--font-serif);
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--culinary-on-surface);
+}
+
+.editorial-usda-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-editorial-sm);
+  background-color: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.editorial-usda-badge.estimated {
+  background-color: #fff3e0;
+  color: #e65100;
+  border-color: #ffe0b2;
+}
+
+/* SVG Macro Data Rings */
+.editorial-macro-rings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--culinary-border);
+}
+
+@media (max-width: 480px) {
+  .editorial-macro-rings-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.editorial-ring-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.editorial-svg-ring {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.editorial-svg-ring svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.editorial-ring-bg {
+  stroke: var(--culinary-border);
+  stroke-width: 5;
+  fill: transparent;
+}
+
+.editorial-ring-val {
+  stroke-width: 5;
+  stroke-linecap: round;
+  fill: transparent;
+  transition: stroke-dashoffset 0.8s ease;
+}
+
+.editorial-ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--culinary-on-surface);
+}
+
+.editorial-ring-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--culinary-on-surface-variant);
+}
+
+.editorial-ring-subtext {
+  font-size: 0.6875rem;
+  color: var(--culinary-sandstone-light);
+}
+
+/* USDA Editorial Table Replica */
+.editorial-usda-table {
+  border: 4px solid var(--culinary-on-surface);
+  background-color: var(--culinary-surface-lowest);
+  padding: 1rem;
+  border-radius: 2px;
+}
+
+.usda-header-title {
+  font-family: var(--font-sans);
+  font-size: 1.75rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  border-bottom: 8px solid var(--culinary-on-surface);
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.usda-servings-info {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  border-bottom: 4px solid var(--culinary-on-surface);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.usda-calories-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 8px solid var(--culinary-on-surface);
+  padding: 0.35rem 0;
+  margin-bottom: 0.35rem;
+}
+
+.usda-calories-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.usda-calories-number {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.usda-dv-header {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-align: right;
+  border-bottom: 1px solid var(--culinary-on-surface);
+  padding-bottom: 0.25rem;
+}
+
+.usda-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #dcd9d9;
+  font-size: 0.85rem;
+}
+
+.usda-row.bold {
+  font-weight: 700;
+}
+
+.usda-row.indent {
+  padding-left: 1rem;
+}
+
+.usda-footnote {
+  font-size: 0.65rem;
+  line-height: 1.3;
+  padding-top: 0.5rem;
+  border-top: 4px solid var(--culinary-on-surface);
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+/* --------------------------------------------------------------------------
+   7. BUTTONS & INTERACTIVE STATES
+   -------------------------------------------------------------------------- */
+.btn-editorial-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--culinary-saffron);
+  color: #ffffff;
+  border: 1px solid var(--culinary-saffron-hover);
+  border-radius: var(--radius-editorial-sm);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(234, 88, 12, 0.2);
+}
+
+.btn-editorial-primary:hover {
+  background-color: var(--culinary-saffron-hover);
+  transform: translateY(-1px);
+}
+
+.btn-editorial-primary:active {
+  transform: scale(0.99);
+}
+
+.btn-editorial-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--culinary-surface-lowest);
+  color: var(--culinary-on-surface);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-sm);
+  padding: 0.65rem 1.15rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-editorial-outline:hover {
+  background-color: var(--culinary-surface-low);
+  border-color: var(--culinary-saffron);
+  color: var(--culinary-primary);
+}
+
+.btn-editorial-outline.is-favorite-active {
+  background-color: #fff3ec;
+  border-color: #ffd8c8;
+  color: var(--culinary-primary);
+}
+
+.btn-editorial-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  color: var(--culinary-on-surface-variant);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--culinary-border);
+  transition: all 0.2s ease;
+}
+
+.btn-editorial-text:hover {
+  color: var(--culinary-saffron);
+  border-bottom-color: var(--culinary-saffron);
+}
+
+/* --------------------------------------------------------------------------
+   8. HANDS-FREE COOKING MODE MODAL
+   -------------------------------------------------------------------------- */
+.cook-mode-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(27, 27, 28, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.cook-mode-modal {
+  background-color: var(--culinary-surface-lowest);
+  border: 1px solid var(--culinary-border);
+  border-radius: var(--radius-editorial-lg);
+  max-width: 54rem;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-editorial-raised);
+  overflow: hidden;
+}
+
+.cook-mode-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--culinary-border);
+  background-color: var(--culinary-surface-low);
+}
+
+.cook-mode-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--culinary-on-surface);
+}
+
+.cook-mode-body {
+  padding: 2.5rem;
+  overflow-y: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cook-mode-step-badge {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--culinary-primary);
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.cook-mode-step-text {
+  font-size: 1.5rem; /* Large counter font */
+  line-height: 1.6;
+  color: var(--culinary-on-surface);
+  max-width: 40rem;
+  margin-bottom: 2rem;
+}
+
+.cook-mode-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid var(--culinary-border);
+  background-color: var(--culinary-surface-low);
+}
+
+/* --------------------------------------------------------------------------
+   9. PRINT STYLESHEET OPTIMIZATION
+   -------------------------------------------------------------------------- */
+@media print {
+  .editorial-breadcrumb-bar,
+  .editorial-action-strip,
+  .btn-editorial-primary,
+  .btn-editorial-outline,
+  .editorial-scaler-controls,
+  .editorial-scaler-presets,
+  .cook-mode-overlay {
+    display: none !important;
+  }
+
+  .culinary-detail-page {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  .culinary-main-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .editorial-step-card,
+  .editorial-ingredients-card,
+  .editorial-nutrition-card {
+    box-shadow: none !important;
+    border: 1px solid #cccccc !important;
+  }
+}

@@ -98,7 +98,7 @@ const Home = () => {
       const response = await api.post('/recipes/search', { ingredients });
       setRecipes(response.data.data.recipes);
       setIsSearched(true);
-      
+
       // Scroll smoothly down to the recipes section
       document.getElementById('featured-recipes')?.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
@@ -165,10 +165,9 @@ const Home = () => {
       {/* 1. HERO SECTION SPLIT LAYOUT */}
       <div className="container">
         <section className="hero-grid">
-          
+
           {/* Left Column: Copy & Search Card */}
           <div className="hero-content">
-            <span className="hero-subtitle">MERN RECOMMENDATION PORTFOLIO</span>
             <h1 className="hero-title">
               Authentic Taste of <br />
               <span className="accent-text">Indian Cuisine</span> <br />
@@ -181,7 +180,7 @@ const Home = () => {
             {/* Custom Interactive Input Card */}
             <div className="kitchen-card">
               <h3 className="kitchen-card-title">What's in your kitchen?</h3>
-              
+
               {/* Chip Tag Display */}
               <div className="kitchen-chips-wrapper">
                 {ingredients.length === 0 ? (
@@ -192,8 +191,8 @@ const Home = () => {
                   ingredients.map((ing, idx) => (
                     <div key={idx} className="kitchen-chip">
                       <span>{ing}</span>
-                      <button 
-                        type="button" 
+                      <button
+                        type="button"
                         onClick={() => handleRemoveIngredient(idx)}
                         className="kitchen-chip-remove"
                       >
@@ -206,7 +205,7 @@ const Home = () => {
 
               {/* TextInput Input Row */}
               <div className="kitchen-input-row">
-                <input 
+                <input
                   type="text"
                   placeholder="Enter an ingredient..."
                   className="kitchen-field"
@@ -214,7 +213,7 @@ const Home = () => {
                   onChange={(e) => setIngredientInput(e.target.value)}
                   onKeyDown={handleKeyDown}
                 />
-                <button 
+                <button
                   type="button"
                   onClick={handleSearch}
                   className="btn-find-recipe"
@@ -244,12 +243,12 @@ const Home = () => {
 
           {/* Right Column: Gourmet Image & Review Overlays */}
           <div className="hero-image-container">
-            <img 
-              src="https://images.unsplash.com/photo-1585938338392-50a59970d8ee?w=800&auto=format&fit=crop&q=80" 
-              alt="Authentic Indian Food Curry" 
+            <img
+              src="https://images.unsplash.com/photo-1585938338392-50a59970d8ee?w=800&auto=format&fit=crop&q=80"
+              alt="Authentic Indian Food Curry"
               className="hero-main-image"
             />
-            
+
             {/* Review Widget 1 */}
             <div className="review-card one">
               <div className="review-card-top">
@@ -290,7 +289,7 @@ const Home = () => {
             <span className="stat-number">100+</span>
             <span className="stat-label">Authentic Recipes</span>
           </div>
-          
+
           <div className="stat-item">
             <Users size={24} className="stat-icon" />
             <span className="stat-number">2k+</span>
@@ -324,7 +323,7 @@ const Home = () => {
           <h2 className="section-title" style={{ marginTop: '0.5rem', fontFamily: 'var(--font-h1)' }}>
             How Be The Chef Works?
           </h2>
-          
+
           <div className="works-grid">
             {/* Card 1 */}
             <div className="works-card">
@@ -370,7 +369,7 @@ const Home = () => {
               <h2 className="section-title" style={{ fontFamily: 'var(--font-h1)' }}>Featured Recipes</h2>
               <p className="section-subtext">Most popular dishes cooked this week</p>
             </div>
-            
+
             {isSearched ? (
               <button onClick={handleClearSearch} className="section-link" style={{ background: 'none', border: 'none' }}>
                 Reset Filters & View All
@@ -416,15 +415,15 @@ const Home = () => {
 
 // Simple Utensils inline custom icon component for workflow
 const Utensils = ({ size }) => (
-  <svg 
-    xmlns="http://www.w3.org/2000/svg" 
-    width={size} 
-    height={size} 
-    viewBox="0 0 24 24" 
-    fill="none" 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    strokeLinecap="round" 
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
     strokeLinejoin="round"
   >
     <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />

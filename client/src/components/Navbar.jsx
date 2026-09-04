@@ -23,18 +23,13 @@ const Navbar = () => {
         {/* Center Links */}
         <ul className="nav-links">
           <li>
-            <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end>
-              Recipes
-            </NavLink>
-          </li>
-          <li>
             <a href="#how-it-works" className="nav-link">
               How It Works
             </a>
           </li>
           <li>
             <a href="#featured-recipes" className="nav-link">
-              Regions
+              Recipes
             </a>
           </li>
           <li>
