@@ -1,44 +1,115 @@
+const mongoose = require('mongoose');
+const path = require('path');
+const fs = require('fs');
 const Recipe = require('../models/Recipe');
 
+let localRecipesCache = null;
+
 /**
- * Retrieves all recipes from the database, with optional filters
- * @param {Object} query - Object containing filters (e.g., category, cuisine)
- * @returns {Promise<Array>} - Array of recipe documents
+ * Reads local fallback recipes from server/recipes.json with valid MongoDB ObjectIDs
+ */
+const getLocalRecipes = () => {
+  if (!localRecipesCache) {
+    try {
+      const filePath = path.join(__dirname, '../recipes.json');
+      if (fs.existsSync(filePath)) {
+        const rawData = fs.readFileSync(filePath, 'utf8');
+        const parsed = JSON.parse(rawData);
+        localRecipesCache = parsed.map((item, index) => {
+          // Generate a valid 24-character hex ObjectId string for each fallback item
+          const hexIndex = (index + 1).toString(16).padStart(24, '0');
+          return {
+            _id: item._id || hexIndex,
+            ...item,
+            createdAt: item.createdAt || new Date().toISOString(),
+            updatedAt: item.updatedAt || new Date().toISOString()
+          };
+        });
+      } else {
+        localRecipesCache = [];
+      }
+    } catch (err) {
+      console.error('Error reading server/recipes.json fallback:', err.message);
+      localRecipesCache = [];
+    }
+  }
+  return localRecipesCache;
+};
+
+/**
+ * Fetches recipes from MongoDB if connected and populated, otherwise falls back to recipes.json
+ */
+const fetchRecipesFromDBOrFallback = async (filters = {}) => {
+  if (mongoose.connection.readyState === 1) {
+    try {
+      const recipes = await Recipe.find(filters).exec();
+      if (recipes && recipes.length > 0) {
+        return recipes;
+      }
+    } catch (err) {
+      console.warn('MongoDB query failed, using local JSON fallback:', err.message);
+    }
+  }
+
+  // Filter in-memory fallback recipes
+  let local = getLocalRecipes();
+
+  if (filters.category && filters.category.$regex) {
+    local = local.filter(r => r.category && filters.category.$regex.test(r.category));
+  }
+  if (filters.cuisine && filters.cuisine.$regex) {
+    local = local.filter(r => r.cuisine && filters.cuisine.$regex.test(r.cuisine));
+  }
+  if (filters.region && filters.region.$regex) {
+    local = local.filter(r => r.region && filters.region.$regex.test(r.region));
+  }
+  if (filters.isVegetarian !== undefined) {
+    local = local.filter(r => r.isVegetarian === filters.isVegetarian);
+  }
+
+  return local;
+};
+
+/**
+ * Retrieves all recipes from the database, with optional filters and automatic fallback
  */
 const getAllRecipes = async (query = {}) => {
   const filters = {};
   
-  // Support category filtering
   if (query.category) {
     filters.category = { $regex: new RegExp(query.category, 'i') };
   }
   
-  // Support cuisine filtering
   if (query.cuisine) {
     filters.cuisine = { $regex: new RegExp(query.cuisine, 'i') };
   }
 
-  // Support vegetarian filtering
   if (query.isVegetarian !== undefined) {
     filters.isVegetarian = query.isVegetarian === 'true' || query.isVegetarian === true;
   }
 
-  // Support region filtering
   if (query.region) {
     filters.region = { $regex: new RegExp(query.region, 'i') };
   }
 
-  // Find all recipes matching filters
-  return await Recipe.find(filters);
+  return await fetchRecipesFromDBOrFallback(filters);
 };
 
 /**
- * Retrieves a single recipe document by ID
- * @param {string} recipeId - Mongoose ObjectId of the recipe
- * @returns {Promise<Object>} - Recipe document
+ * Retrieves a single recipe document by ID with fallback support
  */
 const getRecipeById = async (recipeId) => {
-  const recipe = await Recipe.findById(recipeId);
+  if (mongoose.connection.readyState === 1 && mongoose.Types.ObjectId.isValid(recipeId)) {
+    try {
+      const recipe = await Recipe.findById(recipeId).exec();
+      if (recipe) return recipe;
+    } catch (err) {
+      console.warn('MongoDB findById failed, using local fallback:', err.message);
+    }
+  }
+
+  const localList = getLocalRecipes();
+  const recipe = localList.find(r => String(r._id) === String(recipeId));
   if (!recipe) {
     const error = new Error('Recipe not found');
     error.status = 404;
@@ -49,8 +120,6 @@ const getRecipeById = async (recipeId) => {
 
 /**
  * Recommends recipes based on user inputs of available ingredients
- * @param {Array<string>} userIngredients - List of ingredients provided by the user
- * @returns {Promise<Array>} - Sorted array of recipe objects with match percentages
  */
 const recommendRecipes = async (userIngredients) => {
   if (!userIngredients || !Array.isArray(userIngredients) || userIngredients.length === 0) {
@@ -59,7 +128,6 @@ const recommendRecipes = async (userIngredients) => {
     throw error;
   }
 
-  // Normalize user inputs (lowercase and trimmed)
   const normalizedInputs = userIngredients
     .map(ing => ing.toLowerCase().trim())
     .filter(ing => ing.length > 0);
@@ -70,22 +138,17 @@ const recommendRecipes = async (userIngredients) => {
     throw error;
   }
 
-  // Fetch all recipes from DB
-  const recipes = await Recipe.find({});
+  const recipes = await fetchRecipesFromDBOrFallback({});
 
-  // Map recipes to calculate their match percentage
   const matchingRecipes = recipes.map(recipe => {
-    const recipeObject = recipe.toObject();
+    const recipeObject = typeof recipe.toObject === 'function' ? recipe.toObject() : recipe;
     
-    // Extract recipe ingredient names in lowercase
     const recipeIngNames = recipeObject.ingredients.map(ing => ing.name.toLowerCase().trim());
     
-    // Count matches using fuzzy lookup (includes) to support plurals / detail strings
     let matchCount = 0;
     const matchedNames = [];
 
     recipeIngNames.forEach(recipeIng => {
-      // Check if any user ingredient matches the recipe ingredient (or vice-versa)
       const isMatch = normalizedInputs.some(userInput => 
         recipeIng.includes(userInput) || userInput.includes(recipeIng)
       );
@@ -95,18 +158,16 @@ const recommendRecipes = async (userIngredients) => {
       }
     });
 
-    // Calculate match percentage
     const totalIngredients = recipeIngNames.length;
     const matchPercentage = totalIngredients > 0 ? (matchCount / totalIngredients) * 100 : 0;
 
     return {
       ...recipeObject,
       matchCount,
-      matchPercentage: Math.round(matchPercentage * 10) / 10 // Round to 1 decimal place (e.g. 66.7)
+      matchPercentage: Math.round(matchPercentage * 10) / 10
     };
   });
 
-  // Filter out recipes with 0 matching ingredients, and sort by highest percentage descending
   return matchingRecipes
     .filter(recipe => recipe.matchPercentage > 0)
     .sort((a, b) => b.matchPercentage - a.matchPercentage);
@@ -114,22 +175,16 @@ const recommendRecipes = async (userIngredients) => {
 
 /**
  * Generates a scaled shopping list for a specific recipe
- * @param {string} recipeId - Recipe Mongoose ID
- * @param {number} [targetServings] - Desired servings count for scaling
- * @returns {Promise<Object>} - Shopping list details with scaled ingredients
  */
 const generateShoppingList = async (recipeId, targetServings) => {
   const recipe = await getRecipeById(recipeId);
   
-  // Calculate scaling multiplier (default to 1 if target servings is not specified)
   let multiplier = 1;
   if (targetServings && !isNaN(targetServings) && targetServings > 0) {
     multiplier = Number(targetServings) / recipe.servings;
   }
 
-  // Map and scale ingredients
   const shoppingList = recipe.ingredients.map(ing => {
-    // Round to 2 decimal places to avoid long floating point results (e.g. 0.3333333333)
     const scaledQuantity = Math.round((ing.quantity * multiplier) * 100) / 100;
     
     return {
